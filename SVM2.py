@@ -52,7 +52,7 @@ dictionary = make_Dictionary(TRAIN_DIR)
 print ("reading and processing emails from file.")
 features_matrix, labels = extract_features(TRAIN_DIR)
 test_feature_matrix, test_labels = extract_features(TEST_DIR)
-model = svm.SVC()
+model = svm.SVC(kernel="rbf", C = 100 , gamma=0.001)
 print ("Training model.")
 #train model
 model.fit(features_matrix, labels)
