@@ -38,7 +38,7 @@ def extract_features(mail_dir):
                 wordID = i
                 features_matrix[docID,wordID] = words.count(word)
       train_labels[docID] = 0;
-      filepathTokens = fil.split('/')
+      filepathTokens = fil.split('\\')
       lastToken = filepathTokens[len(filepathTokens) - 1]
       if lastToken.startswith("spmsg"):
           train_labels[docID] = 1;
