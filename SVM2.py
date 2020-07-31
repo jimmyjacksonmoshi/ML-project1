@@ -3,6 +3,24 @@ import numpy as np
 from collections import Counter
 from sklearn import svm
 from sklearn.metrics import accuracy_score
+import pickle
+import gzip
+
+def load(file_name):
+    # load the model
+    stream = gzip.open(file_name, "rb")
+    model = cPickle.load(stream)
+    stream.close()
+    return model
+
+
+def save(file_name, model):
+    # save the model
+    stream = gzip.open(file_name, "wb")
+    pickle.dump(model, stream)
+    stream.close()
+
+
 def make_Dictionary(root_dir):
     all_words = []
     emails = [os.path.join(root_dir,f) for f in os.listdir(root_dir)]
@@ -59,3 +77,5 @@ model.fit(features_matrix, labels)
 predicted_labels = model.predict(test_feature_matrix)
 print ("FINISHED classifying. accuracy score : ")
 print (accuracy_score(test_labels, predicted_labels))
+
+save("FirstSVMclassifier", model)
